@@ -1,12 +1,16 @@
 package mg.odg.gen.auth.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -16,7 +20,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
-@Table(name="`user_group`")
+@Table(name="`user_groups`")
 public class UserGroup {
 	
 	@Id
@@ -46,7 +50,18 @@ public class UserGroup {
     
     @Column(name = "updated_by",  nullable = true)
     private String updatedBy;
+    
+    /*-----------start relations-----------*/
+    @OneToMany(mappedBy="userGroup")
+    private List<User> user;
+    
+    @OneToOne
+    @JoinColumn(name="user_role_id")
+    private UserRole userRole;
+    
+    /*-----------end relations-----------*/
 	
+    /*===============END TABLE COLUMNS===================*/
 	public int getUserGroupId() {
 		return userGroupId;
 	}

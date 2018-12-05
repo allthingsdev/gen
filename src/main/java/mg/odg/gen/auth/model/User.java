@@ -1,9 +1,8 @@
 package mg.odg.gen.auth.model;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +23,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="`user`")
+@Table(name="`users`")
 public class User {
 	
 	/*===============START TABLE COLUMNS===================*/
@@ -32,7 +31,7 @@ public class User {
 	@Column(name = "user_id", updatable = false, nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-	private int user_id;
+	private Integer user_id;
 	
 	@Size(max = 255)
     @Column(name = "first_name")
@@ -65,20 +64,30 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdOn;
     
+    @Column(name = "created_by",  nullable = true)
+    private String createdBy;
+    
     @Column(name = "updated_on")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedOn;
     
+    @Column(name = "updated_by",  nullable = true)
+    private String updatedBy;
+    
+    /*-----------start relations-----------*/
+
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="user_group_id")
     private UserGroup userGroup;
     
+    /*-----------end relations-----------*/
+    
     /*===============END TABLE COLUMNS===================*/
     
-    public int getUserId() {
+    public Integer getUserId() {
 		return user_id;
 	}
-	public void setId(int user_id) {
+	public void setId(Integer user_id) {
 		this.user_id = user_id;
 	}
 	
