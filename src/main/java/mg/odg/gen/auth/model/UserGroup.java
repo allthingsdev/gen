@@ -62,6 +62,9 @@ public class UserGroup {
     /*-----------end relations-----------*/
 	
     /*===============END TABLE COLUMNS===================*/
+    
+    /*===============mutators/accessors==================*/
+    
 	public int getUserGroupId() {
 		return userGroupId;
 	}

@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -52,8 +51,8 @@ public class UserRole {
     private String updatedBy;
     
     /*-----------start relations-----------*/
-    @OneToOne
-    @JoinColumn(name="")
+    
+    @OneToOne(mappedBy="userRole")
     private UserGroup userGroup;
     
     @OneToMany(mappedBy="userRole")
@@ -62,4 +61,78 @@ public class UserRole {
     /*-----------end relations-----------*/
     
     /*===============END TABLE COLUMNS===================*/
+    
+    /*===============mutators/accessors==================*/
+    
+	public int getUserRoleId() {
+		return userRoleId;
+	}
+
+	public void setUserRoleId(int userRoleId) {
+		this.userRoleId = userRoleId;
+	}
+
+	public String getUserRoleName() {
+		return userRoleName;
+	}
+
+	public void setUserRoleName(String userRoleName) {
+		this.userRoleName = userRoleName;
+	}
+
+	public String getUserRoleDescription() {
+		return userRoleDescription;
+	}
+
+	public void setUserRoleDescription(String userRoleDescription) {
+		this.userRoleDescription = userRoleDescription;
+	}
+
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public UserGroup getUserGroup() {
+		return userGroup;
+	}
+
+	public void setUserGroup(UserGroup userGroup) {
+		this.userGroup = userGroup;
+	}
+
+	public List<UserRole> getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(List<UserRole> userRole) {
+		this.userRole = userRole;
+	}
 }

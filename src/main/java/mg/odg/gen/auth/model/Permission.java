@@ -61,14 +61,16 @@ public class Permission {
 	@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="function_id")
     private Function function;
+	
+    @OneToMany(mappedBy="permission")
+    private List<RolePermission> rolePermission;
 
     /*-----------end relations-----------*/
     
     /*===============END TABLE COLUMNS===================*/
+
+    /*===============mutators/accessors==================*/
 	
-    @OneToMany(mappedBy="permission")
-    private List<RolePermission> rolePermission;
-    
     public Integer getPermissionId() {
 		return permissionId;
 	}
@@ -148,6 +150,4 @@ public class Permission {
 	public void setFunction(Function function) {
 		this.function = function;
 	}
-
-	
 }

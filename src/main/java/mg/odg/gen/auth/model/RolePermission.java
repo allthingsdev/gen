@@ -58,8 +58,81 @@ public class RolePermission {
 	@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="permission_id")
     private Permission permission;
-	
+
     /*-----------end relations-----------*/
     
     /*===============END TABLE COLUMNS===================*/
+
+	public int getRolePermissionId() {
+		return rolePermissionId;
+	}
+
+	public void setRolePermissionId(int rolePermissionId) {
+		this.rolePermissionId = rolePermissionId;
+	}
+
+	public String getRolePermissionName() {
+		return rolePermissionName;
+	}
+
+	public void setRolePermissionName(String rolePermissionName) {
+		this.rolePermissionName = rolePermissionName;
+	}
+
+	public String getRolePermissionDescription() {
+		return rolePermissionDescription;
+	}
+
+	public void setRolePermissionDescription(String rolePermissionDescription) {
+		this.rolePermissionDescription = rolePermissionDescription;
+	}
+
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Date getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+
+	public String getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(String updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	public UserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(UserRole userRole) {
+		this.userRole = userRole;
+	}
+
+	public Permission getPermission() {
+		return permission;
+	}
+
+	public void setPermission(Permission permission) {
+		this.permission = permission;
+	}
+	
 }
