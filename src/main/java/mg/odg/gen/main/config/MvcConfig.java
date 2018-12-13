@@ -6,12 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan
-public class MvcConfig {
+public class MvcConfig implements WebMvcConfigurer {
 
 	public void configureDefaultServletHandling() {
 		
@@ -28,9 +29,33 @@ public class MvcConfig {
 		return resolver;
 	}
 	
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	public void addResourceHandler(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/css/**")
 		.addResourceLocations("/css/");
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
