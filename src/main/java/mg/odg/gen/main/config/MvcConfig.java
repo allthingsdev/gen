@@ -17,7 +17,7 @@ public class MvcConfig {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		
 		resolver.setPrefix("/");
-		resolver.setSuffix(".uhj");
+		resolver.setSuffix(".html");
 		resolver.setExposeContextBeansAsAttributes(true);
 		
 		return resolver;
