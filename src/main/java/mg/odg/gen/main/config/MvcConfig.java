@@ -1,37 +1,46 @@
 package mg.odg.gen.main.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.ViewResolver;
+import org.springframework.context.annotation.Description;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan
 public class MvcConfig implements WebMvcConfigurer {
+	
+	@Autowired
+	ApplicationContext applicationContext;
 
 	public void configureDefaultServletHandling() {
 		
 	}
 	
 	@Bean
-	public ViewResolver viewResolver() {
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		
-		resolver.setPrefix("/");
-		resolver.setSuffix(".html");
-		resolver.setExposeContextBeansAsAttributes(true);
-		
-		return resolver;
-	}
+    @Description("Thymeleaf template resolver serving HTML 5")
+    public ClassLoaderTemplateResolver templateResolver() {
+        
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        
+        templateResolver.setPrefix("templates/");
+        templateResolver.setCacheable(false);
+        templateResolver.setSuffix(".html");        
+        templateResolver.setTemplateMode("HTML5");
+        templateResolver.setCharacterEncoding("UTF-8");
+        
+        return templateResolver;
+    }
 	
-	public void addResourceHandler(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/css/**")
-		.addResourceLocations("/css/");
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
+		registry.addResourceHandler("/resources/css/**").addResourceLocations("/resources/css/");
 	}
 	
 }
