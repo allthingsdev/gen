@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
@@ -14,41 +14,35 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Configuration
 @ComponentScan
 public class MvcConfig implements WebMvcConfigurer {
-	
+
 	@Autowired
-	   private ApplicationContext applicationContext;
-
-	   /*
-	    * STEP 1 - Create SpringResourceTemplateResolver
-	    * */
-	   @Bean
-	   public SpringResourceTemplateResolver templateResolver() {
-	      SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-	      templateResolver.setApplicationContext(applicationContext);
-	      templateResolver.setSuffix(".html");
-	      return templateResolver;
-	   }
-
-	   /*
-	    * STEP 2 - Create SpringTemplateEngine
-	    * */
-	   @Bean
-	   public SpringTemplateEngine templateEngine() {
-	      SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-	      templateEngine.setTemplateResolver(templateResolver());
-	      templateEngine.setEnableSpringELCompiler(true);
-	      return templateEngine;
-	   }
-
-	   /*
-	    * STEP 3 - Register ThymeleafViewResolver
-	    * */
-	   @Override
-	   public void configureViewResolvers(ViewResolverRegistry registry) {
-	      ThymeleafViewResolver resolver = new ThymeleafViewResolver();
-	      resolver.setTemplateEngine(templateEngine());
-	      registry.viewResolver(resolver);
-	   }
+    ApplicationContext applicationContext;
+    
+    //1. Creating SpringResourceTemplateResolver
+    @Bean
+    public SpringResourceTemplateResolver springTemplateResolver(){
+        SpringResourceTemplateResolver springTemplateResolver = new SpringResourceTemplateResolver();
+        springTemplateResolver.setApplicationContext(this.applicationContext);
+        springTemplateResolver.setPrefix("/");
+        springTemplateResolver.setSuffix(".html");
+        return springTemplateResolver;
+    }
+    
+    //2. Creating SpringTemplateEngine
+    @Bean
+    public SpringTemplateEngine springTemplateEngine(){
+        SpringTemplateEngine springTemplateEngine = new SpringTemplateEngine();
+        springTemplateEngine.setTemplateResolver(springTemplateResolver());
+        return springTemplateEngine;
+    }
+    
+    //3. Registering ThymeleafViewResolver
+    @Bean
+    public ViewResolver viewResolver(){
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(springTemplateEngine());
+        return viewResolver;
+    }
 }
 
 
