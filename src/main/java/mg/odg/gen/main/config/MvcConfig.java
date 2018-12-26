@@ -20,20 +20,23 @@ public class MvcConfig implements WebMvcConfigurer {
     
     //1. Creating SpringResourceTemplateResolver
     @Bean
-    public SpringResourceTemplateResolver springTemplateResolver(){
-        SpringResourceTemplateResolver springTemplateResolver = new SpringResourceTemplateResolver();
-        springTemplateResolver.setApplicationContext(this.applicationContext);
-        springTemplateResolver.setPrefix("/");
-        springTemplateResolver.setSuffix(".html");
-        return springTemplateResolver;
+    public SpringResourceTemplateResolver templateResolver(){
+        SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+        
+        templateResolver.setApplicationContext(this.applicationContext);
+        templateResolver.setTemplateMode("XHTML");
+        templateResolver.setPrefix("/WEB-INF/views/");
+        templateResolver.setSuffix(".html");
+        
+        return templateResolver;
     }
     
     //2. Creating SpringTemplateEngine
     @Bean
     public SpringTemplateEngine springTemplateEngine(){
-        SpringTemplateEngine springTemplateEngine = new SpringTemplateEngine();
-        springTemplateEngine.setTemplateResolver(springTemplateResolver());
-        return springTemplateEngine;
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver());
+        return templateEngine;
     }
     
     //3. Registering ThymeleafViewResolver
