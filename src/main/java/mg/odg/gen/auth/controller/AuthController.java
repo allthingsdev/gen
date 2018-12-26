@@ -11,5 +11,6 @@ public class AuthController{
 	public ModelAndView login() {
 		return new ModelAndView("auth/login");
 	}
-
+	
+    
 }
